@@ -1,0 +1,16 @@
+/** Convert to rem */
+@function rem($value) {
+    $remValue: calc($value / $browserContext) + rem;
+    @return $remValue;
+}
+
+/** Convert to em */
+@function em($pixels, $context: $browserContext) {
+    @return #{calc($pixels/$context)}em;
+}
+
+/** Convert line height */
+@function lineHeight($line, $fontSize) {
+    $value: calc($line / $fontSize);
+    @return $value;
+}

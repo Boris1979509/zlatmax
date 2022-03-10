@@ -1,0 +1,21 @@
+<div class="sub-menu-catalog__block" data-parent="@@id" hidden>
+  @@for (var item of categories) {
+  <div class="sub-menu-catalog__column">
+    <div class="sub-menu-catalog__category">
+      <a
+        href="#"
+        class="sub-menu-catalog__category-link"
+        title="` + item.name + `"
+        >` + item.name + `</a
+      >
+    </div>
+    <ul class="sub-menu-catalog__list">
+      @@loop('_header_sub_menu_catalog_column_item.html',
+      `+(JSON.stringify(item.child))+`)
+    </ul>
+    <div class="sub-menu-catalog__footer">
+      <a href="#" class="sub-menu-catalog__all">Смотреть всё</a>
+    </div>
+  </div>
+  }
+</div>

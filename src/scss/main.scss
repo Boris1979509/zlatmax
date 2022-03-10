@@ -1,0 +1,64 @@
+@import "base/*.scss";
+@import "vars";
+@import "breakpoints";
+@import "functions";
+@import "partials/header";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    letter-spacing: rem(1);
+
+    // @include md {
+    //     background-color: red;
+    // }
+}
+
+
+a {
+    text-decoration: none;
+
+    &:visited,
+    &:active,
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+body {
+    font-size: rem(14);
+    font-family: $fontFamily;
+    color: $mainColor;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.container {
+    display: flex;
+    max-width: $maxWidthContainer + px;
+    padding: 0 rem(15);
+    margin: 0 auto;
+}
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+
+    // Прижимаем footer 
+    >main {
+        flex: 1 1 auto;
+    }
+}
