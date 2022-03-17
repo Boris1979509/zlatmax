@@ -6,6 +6,7 @@
 }
 
 .top-header {
+
     padding: rem(10) 0;
 
     &__container {
@@ -20,20 +21,29 @@
     }
 
     &__user {
+        position: relative;
+        z-index: 5;
         display: inline-flex;
         font-size: rem(18);
         color: #fff;
         font-weight: 600;
         line-height: lineHeight(22, 18);
+        gap: em(15, 18);
 
         &::before {
             font-size: rem(28);
-            margin-right: em(15, 28);
         }
 
         &:hover {
             span {
                 text-decoration: underline;
+            }
+        }
+
+        @include md-d {
+
+            >span {
+                display: none;
             }
         }
     }
@@ -47,7 +57,9 @@
         row-gap: rem(5);
 
         @include md-d {
-            display: none;
+            display: flex;
+            flex-direction: column;
+            row-gap: rem(25)
         }
     }
 
@@ -74,27 +86,25 @@
             display: flex;
             flex-direction: row-reverse;
             justify-content: space-between;
-            align-items: flex-start;
 
             &::before {
-                display: flex;
-                flex: 0 0 rem(8);
-                height: rem(14);
+                display: block;
                 font-size: rem(8);
-                transform: rotate(-90deg);
-                justify-content: center;
-                align-items: center;
+                transform: translateY(rem(-1)) rotate(-90deg);
             }
         }
+    }
+
+    @include md-d {
+        display: none;
     }
 }
 
 .menu {
-    display: none;
-
     @include md-d {
-        display: block;
-        flex: 0 0 rem(30);
+        display: flex;
+        flex: 1 1 auto;
+        justify-content: flex-end;
     }
 
     &__icon {
@@ -107,18 +117,30 @@
             width: 100%;
             height: 100%;
             top: 0;
-            left: 0;
+            left: -100%;
             overflow: auto;
             background-color: $mainDarkColor;
             z-index: 4;
             padding: rem(80) rem(15) rem(50) rem(15);
-        }
+            transition: all .3s ease 0s;
 
-        &-clone {
-            @include md-d {
-                display: flex;
-                flex-direction: column;
-                row-gap: rem(10)
+            &::before {
+                content: "";
+                position: fixed;
+                left: -100%;
+                top: 0;
+                width: 100%;
+                height: rem(70);
+                background-color: $mainDarkColor;
+            }
+
+            &.menu-open {
+                left: 0;
+
+                &::before {
+                    left: 0;
+                    z-index: 5;
+                }
             }
         }
     }
@@ -131,7 +153,7 @@
     &__container {
         display: flex;
         align-items: center;
-        min-height: rem(70)
+        min-height: rem(70);
     }
 
     &__logo {
@@ -146,7 +168,10 @@
     }
 
     &__search {
-        padding-right: rem(20);
+        @include lg-up {
+            padding-right: rem(20);
+        }
+
         flex: 1 1 auto;
 
         @include xl {
@@ -158,9 +183,15 @@
 .search-header {
     position: relative;
 
+    @include xs-d {
+        background: #fff;
+        border-radius: rem(50);
+    }
+
     @include xl {
         max-width: rem(350);
     }
+
 
     &__button {
         font-size: rem(13);
@@ -169,26 +200,58 @@
         height: rem(41);
         width: rem(41);
         top: 0;
-        left: em(5);
+
+        @include sm-up {
+            left: em(5);
+        }
+
+
+        &::before {
+            font-size: rem(16);
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        @include xs-d {
+            right: em(5);
+
+            &::before {
+                color: $mainColor;
+            }
+        }
     }
 
     &__input {
         font-family: $fontFamily;
         font-size: rem(14);
         font-weight: 500;
-        border-radius: rem(3);
-        border: rem(1) solid rgba(4, 4, 4, 0.5);
         height: rem(41);
-        padding: 0 rem(20) 0 rem(45);
-        background: rgba(7, 7, 7, 0.03);
         outline: none;
         color: $mainColor;
         width: 100%;
 
-        &::placeholder {
-            letter-spacing: rem(1);
-            color: rgba(0, 0, 0, 0.5);
+        @include sm-up {
+            border-radius: rem(3);
+            border: rem(1) solid rgba(4, 4, 4, 0.5);
+            padding: 0 rem(20) 0 rem(45);
+            background: rgba(7, 7, 7, 0.03);
+
+            &::placeholder {
+                letter-spacing: rem(1);
+                color: rgba(0, 0, 0, 0.5);
+            }
         }
+
+        @include xs-d {
+            border-radius: rem(50);
+            border: none;
+            padding: 0 rem(45) 0 rem(20);
+
+            &::placeholder {
+                letter-spacing: rem(1);
+                color: $mainColor
+            }
+        }
+
     }
 }
 
@@ -218,15 +281,33 @@
                 text-decoration: underline;
             }
         }
+
+        @include md-d {
+            display: none;
+        }
     }
 
     &__phone {}
 
     &__favorite {
+        position: relative;
+        z-index: 5;
         font-size: rem(27);
+
+        &::before {
+            color: $mainColor;
+
+            @include md-d {
+                color: #fff;
+            }
+        }
+
     }
 
     &__cart {
+        position: relative;
+        z-index: 5;
+
         @include lg-d {
             margin-right: rem(8);
         }
@@ -239,10 +320,37 @@
     }
 
     &__phone {
+        position: relative;
+        z-index: 5;
         font-weight: 600;
         font-size: rem(18);
         line-height: lineHeight(22, 18);
         color: $mainColor;
+
+        &::before {
+            @extend %ic;
+            @extend ._icon-phone;
+            display: none;
+        }
+
+        @include md-d {
+            color: #fff;
+
+            &::before {
+                color: #fff;
+            }
+        }
+
+        @include sm-d {
+            &::before {
+                display: block;
+                font-size: rem(32);
+            }
+
+            >span {
+                display: none;
+            }
+        }
     }
 
     &__arrow {
@@ -252,6 +360,10 @@
             font-size: rem(10);
             color: $mainOrangeColor;
         }
+
+        @include md-d {
+            display: none;
+        }
     }
 
     &__callback {
@@ -259,6 +371,10 @@
         font-size: rem(18);
         line-height: lineHeight(22, 18);
         color: $mainOrangeColor;
+
+        @include md-d {
+            display: none;
+        }
     }
 }
 
@@ -273,6 +389,11 @@
 
         &::before {
             font-size: rem(35);
+            color: $mainColor;
+
+            @include md-d {
+                color: #fff;
+            }
         }
 
         span {
@@ -303,6 +424,7 @@
 
     &__sum {
         font-weight: 500;
+        color: $mainColor;
     }
 
     &__link {
@@ -315,6 +437,10 @@
     background-color: $mainDarkColor;
     width: 100%;
     position: relative;
+
+    @include xs-d {
+        padding: rem(20) 0;
+    }
 }
 
 .menu-catalog {
@@ -323,19 +449,52 @@
     &__list {
         display: flex;
         justify-content: space-between;
-        gap: rem(10);
+        column-gap: rem(10);
+
+        @include md-d {
+            flex-direction: column;
+            row-gap: rem(25);
+        }
     }
 
     &__link {
         transition: all 1s ease 0s;
         color: #fff;
-        min-height: rem(70);
-        padding: 0 rem(10);
         display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
         position: relative;
+        font-weight: 500;
+        font-size: rem(16);
+        line-height: lineHeight(20, 16);
+
+        &[data-id] {
+            &::before {
+
+                @extend %ic;
+                @extend ._icon-arrow-bottom;
+                display: none;
+
+                @include md-d {
+                    display: block;
+                    font-size: rem(8);
+                    transform: translateY(rem(-1)) rotate(-90deg);
+                }
+            }
+
+            @include md-d {
+                display: flex;
+                flex-direction: row-reverse;
+                justify-content: space-between;
+                width: 100%;
+            }
+        }
+
+        @include lg-up {
+            min-height: rem(70);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 rem(10);
+        }
 
         &::after {
             content: '';
@@ -350,23 +509,25 @@
             background-color: $mainOrangeColor;
         }
 
-        &:hover {
-            &::after {
-                opacity: 1;
-                visibility: visible;
+        @include md-up {
+            &:hover {
+                &::after {
+                    opacity: 1;
+                    visibility: visible;
+                }
             }
-        }
 
-        &:hover {
-            color: $mainOrangeColor;
-        }
+            &:hover {
+                color: $mainOrangeColor;
+            }
 
-        &._active {
-            color: $mainOrangeColor;
+            &._active {
+                color: $mainOrangeColor;
 
-            &::after {
-                opacity: 1;
-                visibility: visible;
+                &::after {
+                    opacity: 1;
+                    visibility: visible;
+                }
             }
         }
     }
@@ -375,10 +536,66 @@
         background-color: $mainDarkColor;
         width: 100%;
     }
+
+    &__back {
+        display: none;
+
+        @include md-d {
+            display: inline-flex;
+            align-items: center;
+            color: #fff;
+            font-size: rem(16);
+            font-weight: 500;
+            font-family: inherit;
+
+            &::before {
+                font-size: rem(20);
+                margin-right: rem(10);
+            }
+
+            &:not(:last-child) {
+                margin-bottom: rem(35);
+            }
+        }
+
+    }
+
+    @include md-d {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        overflow: auto;
+        height: 100%;
+        width: 100%;
+        background-color: $mainDarkColor;
+        padding: rem(25) rem(15) rem(50) rem(15);
+        transition: all .3s ease 0s;
+
+        .catalog-open & {
+            left: 0;
+            z-index: 6;
+        }
+    }
 }
 
 .sub-menu-catalog {
+    @include md-d {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        overflow: auto;
+        height: 100%;
+        width: 100%;
+        background-color: $mainDarkColor;
+        padding: rem(25) rem(15) rem(50) rem(15);
+        transition: all .3s ease 0s;
 
+        .sub-menu-open & {
+            left: 0;
+            z-index: 6;
+            display: block;
+        }
+    }
 
     &__container {
         padding: 0;
@@ -390,6 +607,10 @@
 
         &._show {
             display: flex;
+
+            @include md-d {
+                display: block;
+            }
         }
     }
 
@@ -402,8 +623,7 @@
         color: #fff;
         font-size: rem(16);
         line-height: lineHeight(20, 16);
-        font-weight: 700;
-
+        font-weight: 500;
     }
 
     &__category {
@@ -411,14 +631,30 @@
         display: flex;
         flex-direction: column;
         align-self: flex-start;
-        padding: rem(30) rem(15);
+
+        @include md-up {
+            font-weight: 700;
+            padding: rem(30) rem(15) rem(30) 0;
+        }
+
+        @include md-d {
+            &:not(:last-child) {
+                margin-bottom: rem(25);
+            }
+        }
     }
+
+
 
     &__footer {
         border-top: 1px solid rgba(255, 255, 255, 0.3);
         padding: rem(10);
         display: flex;
         align-items: center;
+
+        @include md-d {
+            display: none;
+        }
     }
 
     &__all {
@@ -438,6 +674,10 @@
         gap: rem(20);
         padding: rem(30) rem(15);
         border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+        @include md-d {
+            display: none;
+        }
     }
 
     &__link {
@@ -448,6 +688,29 @@
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    &__back {
+        display: none;
+
+        @include md-d {
+            display: inline-flex;
+            align-items: center;
+            color: #fff;
+            font-size: rem(16);
+            font-weight: 500;
+            font-family: inherit;
+
+            &::before {
+                font-size: rem(20);
+                margin-right: rem(10);
+            }
+
+            &:not(:last-child) {
+                margin-bottom: rem(35);
+            }
+        }
+
     }
 }
 
@@ -461,13 +724,14 @@
         width: 30px;
         height: rem(18);
         cursor: pointer;
-        z-index: 5;
+        z-index: 10;
 
         >span,
         &::before,
         &::after {
             content: "";
             transition: all .3s ease 0s;
+            transform: rotate(0deg);
             left: 0;
             position: absolute;
             width: 100%;
@@ -484,7 +748,24 @@
         }
 
         >span {
-            top: calc(50% - rem(1))
+            top: calc(50% - rem(1));
+        }
+
+        &.open {
+            >span {
+                opacity: 0;
+                left: rem(-30);
+            }
+
+            &::after {
+                top: calc(50% - rem(1));
+                transform: rotate(-135deg);
+            }
+
+            &::before {
+                top: calc(50% - rem(1));
+                transform: rotate(135deg);
+            }
         }
     }
 }

@@ -18,7 +18,9 @@ $responsiveType: 1;
 $containerWidth: $maxWidthContainer+$containerPadding;
 
 /* ============ Breakpoints ============== */
-$breakpoints: (sm: 640px,
+$breakpoints: (xs: 0,
+    sm: 576px,
     md: 768px,
-    lg: 1024px,
-    xl: 1280px)
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px)

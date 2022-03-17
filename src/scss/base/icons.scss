@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'icons';
-    src: url('../font/icons.eot');
-    src: url('../font/icons.eot') format('embedded-opentype'),
-        url('../font/icons.ttf') format('truetype'),
-        url('../font/icons.woff') format('woff');
+    src: url('../fonts/icons/icons.eot');
+    src: url('../fonts/icons/icons.eot') format('embedded-opentype'),
+        url('../fonts/icons/icons.ttf') format('truetype'),
+        url('../fonts/icons/icons.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: block;
@@ -28,50 +28,58 @@
     }
 }
 
+._icon-mail:before {
+    content: "\e908";
+}
+
 ._icon-arrow-bottom:before {
     content: "\e900";
 }
 
-._icon-cart:before {
+._icon-arrow-left:before {
     content: "\e901";
 }
 
-._icon-clock:before {
+._icon-cart:before {
     content: "\e902";
 }
 
-._icon-compare:before {
+._icon-clock:before {
     content: "\e903";
 }
 
-._icon-favorite:before {
+._icon-compare:before {
     content: "\e904";
 }
 
-._icon-location:before {
+._icon-favorite:before {
     content: "\e905";
 }
 
-._icon-logo:before {
+._icon-location:before {
     content: "\e906";
 }
 
-._icon-mail:before {
+._icon-logo:before {
     content: "\e907";
 }
 
 ._icon-phone:before {
-    content: "\e908";
+    content: "\e909";
 }
 
-._icon-search:before {
+._icon-rub:before {
     content: "\e90a";
 }
 
-._icon-spoiler-arrow:before {
+._icon-search:before {
     content: "\e90b";
 }
 
-._icon-user:before {
+._icon-spoiler-arrow:before {
     content: "\e90c";
+}
+
+._icon-user:before {
+    content: "\e90d";
 }

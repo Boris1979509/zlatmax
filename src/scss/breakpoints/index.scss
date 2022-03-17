@@ -1,27 +1,41 @@
-/* ======= Desktop first ============ */
+/* ======= Min-width ============ */
 
-// sm
+// Small devices (landscape phones, 576px and up)
 @mixin sm-up {
     @media (min-width: map-get($breakpoints, sm)) {
         @content;
     }
 }
 
-// md
+// Medium devices (tablets, 768px and up)
 @mixin md-up {
     @media (min-width: map-get($breakpoints, md)) {
         @content;
     }
 }
 
-// lg
+// Large devices (desktops, 992px and up)
 @mixin lg-up {
     @media (min-width: map-get($breakpoints, lg)) {
         @content;
     }
 }
 
-/* ======= Only ============ */
+// X-Large devices (large desktops, 1200px and up)
+@mixin xl-up {
+    @media (min-width: map-get($breakpoints, xl)) {
+        @content;
+    }
+}
+
+// XX-Large devices (larger desktops, 1400px and up)
+@mixin xxl-up {
+    @media (min-width: map-get($breakpoints, xxl)) {
+        @content;
+    }
+}
+
+/* ======= Single breakpoint ============ */
 // sm
 @mixin sm {
     @media (max-width: map-get($breakpoints, md) - .2px) and (min-width: map-get($breakpoints, sm)) {
@@ -45,29 +59,44 @@
 
 // xl
 @mixin xl {
-    @media (min-width: map-get($breakpoints, xl)) {
+    @media (max-width: map-get($breakpoints, xxl) - .2px) and (min-width: map-get($breakpoints, xl)) {
         @content;
     }
 }
 
-/* ======= Mobile first ============ */
-// lg
-@mixin lg-d {
-    @media (max-width: map-get($breakpoints, xl) - .2px) {
+/* ======= Max-width ============ */
+
+// X-Small devices (portrait phones, less than 576px)
+@mixin xs-d {
+    @media (max-width: map-get($breakpoints, sm) - .2px) {
         @content;
     }
 }
 
-// md
+// Small devices (landscape phones, less than 768px)
+@mixin sm-d {
+    @media (max-width: map-get($breakpoints, md) - .2px) {
+        @content;
+    }
+}
+
+// Medium devices (tablets, less than 992px)
 @mixin md-d {
     @media (max-width: map-get($breakpoints, lg) - .2px) {
         @content;
     }
 }
 
-// sm
-@mixin sm-d {
-    @media (max-width: map-get($breakpoints, md) - .2px) {
+// Large devices (desktops, less than 1200px)
+@mixin lg-d {
+    @media (max-width: map-get($breakpoints, xl) - .2px) {
+        @content;
+    }
+}
+
+// X-Large devices (large desktops, less than 1400px)
+@mixin xl-d {
+    @media (max-width: map-get($breakpoints, xxl) - .2px) {
         @content;
     }
 }
